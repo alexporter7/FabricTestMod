@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
-  "version": "${version}",
+  "id": "ftm",
+  "version": "0.1.0",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Fabric Text Mod",
+  "description": "This is a test mod for Fabric",
   "authors": [
-    "Me!"
+    "Alex"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
@@ -19,11 +19,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "com.github.fabrictestmod.FabricTestMod"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "ftm.mixins.json"
   ],
 
   "depends": {
