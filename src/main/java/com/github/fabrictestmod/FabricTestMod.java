@@ -13,7 +13,8 @@ public class FabricTestMod implements ModInitializer {
 	public static final String MOD_ID = "ftm";
 
 	//Define Mod Items
-	private static final Item CREEPER_SOUL = new CreeperSoulItem(new Item.Settings().group(ItemGroup.MATERIALS).maxCount(1));
+	public static final Item CREEPER_SOUL = new CreeperSoulItem(
+			new Item.Settings().group(ItemGroup.MATERIALS).maxCount(1).maxDamage(10));
 
 	@Override
 	public void onInitialize() {

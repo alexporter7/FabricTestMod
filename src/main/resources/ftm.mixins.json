@@ -4,6 +4,7 @@
   "package": "com.github.fabrictestmod.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "CreeperMixin"
   ],
   "client": [
     "ExampleMixin"
