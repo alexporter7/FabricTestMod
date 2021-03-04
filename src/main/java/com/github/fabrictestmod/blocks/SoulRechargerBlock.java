@@ -1,10 +1,7 @@
 package com.github.fabrictestmod.blocks;
 
 import com.github.fabrictestmod.FabricTestMod;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,14 +20,13 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class SoulRechargerBlock extends BlockWithEntity {
+public class SoulRechargerBlock extends Block implements BlockEntityProvider {
 
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
     public SoulRechargerBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
-
     }
 
     @Nullable
@@ -63,9 +59,9 @@ public class SoulRechargerBlock extends BlockWithEntity {
     }
 
 
-
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
         builder.add(FACING);
     }
 }

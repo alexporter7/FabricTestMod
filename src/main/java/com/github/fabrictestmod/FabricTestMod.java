@@ -29,8 +29,7 @@ public class FabricTestMod implements ModInitializer {
 
 	//Define Mod Blocks
 	public static final Block SOUL_RECHARGER_BLOCK = new SoulRechargerBlock(
-			FabricBlockSettings.of(Material.METAL).strength(4.0f)
-	);
+			FabricBlockSettings.of(Material.METAL).strength(4.0f));
 
 	//Define Block Entities
 	public static BlockEntityType<SoulRechargerBlockEntity> SOUL_RECHARGER_BLOCK_ENTITY;
