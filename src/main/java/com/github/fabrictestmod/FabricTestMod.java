@@ -1,8 +1,15 @@
 package com.github.fabrictestmod;
 
+import com.github.fabrictestmod.blocks.SoulRechargerBlock;
+import com.github.fabrictestmod.blocks.SoulRechargerBlockEntity;
 import com.github.fabrictestmod.items.CreeperSoulItem;
 import com.github.fabrictestmod.items.CreeperSoulEssence;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.Material;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -19,12 +26,28 @@ public class FabricTestMod implements ModInitializer {
 	public static final Item CREEPER_SOUL_ESSENCE = new CreeperSoulEssence(
 			new Item.Settings().group(ItemGroup.MATERIALS).maxCount(64));
 
+	//Define Mod Blocks
+	public static final Block SOUL_RECHARGER_BLOCK = new SoulRechargerBlock(
+			FabricBlockSettings.of(Material.METAL).strength(4.0f)
+	);
+
+	//Define Block Entities
+	public static BlockEntityType<SoulRechargerBlockEntity> SOUL_RECHARGER_BLOCK_ENTITY;
+
 	@Override
 	public void onInitialize() {
 
 		//Register Mod Items
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "creeper_soul"), CREEPER_SOUL);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "creeper_soul_essence"), CREEPER_SOUL_ESSENCE);
+
+		//Register Blocks
+		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "soul_recharger_block"), SOUL_RECHARGER_BLOCK);
+
+		//Register Block Entities
+		Registry.register(Registry.BLOCK_ENTITY_TYPE,
+				String.format("%s:soul_recharger_block_entity", MOD_ID),
+				BlockEntityType.Builder.create(SoulRechargerBlockEntity::new).build(null));
 
 		System.out.println("FTM has been initialized");
 	}
