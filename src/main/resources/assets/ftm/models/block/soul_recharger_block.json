@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "ftm:block/soul_furnace_side",
+    "front": "ftm:block/soul_furnace_front",
+    "side": "ftm:block/soul_furnace_side",
+    "particle": "ftm:block/soul_furnace_side"
+  }
+}

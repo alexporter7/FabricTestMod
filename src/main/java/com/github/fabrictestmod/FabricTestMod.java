@@ -2,14 +2,15 @@ package com.github.fabrictestmod;
 
 import com.github.fabrictestmod.blocks.SoulRechargerBlock;
 import com.github.fabrictestmod.blocks.SoulRechargerBlockEntity;
-import com.github.fabrictestmod.items.CreeperSoulItem;
 import com.github.fabrictestmod.items.CreeperSoulEssence;
+import com.github.fabrictestmod.items.CreeperSoulItem;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -43,6 +44,8 @@ public class FabricTestMod implements ModInitializer {
 
 		//Register Blocks
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "soul_recharger_block"), SOUL_RECHARGER_BLOCK);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "soul_recharger_block"),
+				new BlockItem(SOUL_RECHARGER_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
 
 		//Register Block Entities
 		Registry.register(Registry.BLOCK_ENTITY_TYPE,

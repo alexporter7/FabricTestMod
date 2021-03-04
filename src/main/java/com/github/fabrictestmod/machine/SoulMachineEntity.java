@@ -1,13 +1,10 @@
 package com.github.fabrictestmod.machine;
 
-import com.github.fabrictestmod.FabricTestMod;
-import com.github.fabrictestmod.blocks.SoulRechargerBlockEntity;
 import com.github.fabrictestmod.util.MachineImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.collection.DefaultedList;

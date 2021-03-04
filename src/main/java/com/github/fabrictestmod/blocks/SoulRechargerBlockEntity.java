@@ -25,4 +25,5 @@ public class SoulRechargerBlockEntity extends SoulMachineEntity {
     public DefaultedList<ItemStack> getItems() {
         return null;
     }
+
 }

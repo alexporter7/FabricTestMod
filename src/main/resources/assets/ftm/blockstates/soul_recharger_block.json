@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "ftm:block/soul_recharger_block"},
+    "facing=south": { "model": "ftm:block/soul_recharger_block", "y": 180},
+    "facing=west": { "model": "ftm:block/soul_recharger_block", "y": 270},
+    "facing=east": { "model": "ftm:block/soul_recharger_block", "y": 90}
+  }
+}
