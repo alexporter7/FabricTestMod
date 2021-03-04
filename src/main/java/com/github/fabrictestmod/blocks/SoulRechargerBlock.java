@@ -48,7 +48,6 @@ public class SoulRechargerBlock extends Block implements BlockEntityProvider {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        player.sendMessage(new LiteralText(world.getBlockState(pos).toString()), false);
         return ActionResult.SUCCESS;
     }
 
@@ -57,7 +56,6 @@ public class SoulRechargerBlock extends Block implements BlockEntityProvider {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
     }
-
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
