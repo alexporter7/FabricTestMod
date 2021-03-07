@@ -7,12 +7,15 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -20,9 +23,10 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class SoulRechargerBlock extends Block implements BlockEntityProvider {
+public class SoulRechargerBlock extends BlockWithEntity {
 
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    public static final Identifier ID = new Identifier(FabricTestMod.MOD_ID, "soul_recharger_block");
 
     public SoulRechargerBlock(Settings settings) {
         super(settings);
@@ -47,7 +51,19 @@ public class SoulRechargerBlock extends Block implements BlockEntityProvider {
     }
 
     @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if(!world.isClient()) {
+            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+            if(screenHandlerFactory != null)
+                player.openHandledScreen(screenHandlerFactory);
+            else
+                player.sendMessage(new LiteralText("Screen Handler Factory is Null"), false);
+        }
         return ActionResult.SUCCESS;
     }
 
