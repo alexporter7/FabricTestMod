@@ -15,7 +15,7 @@ public abstract class SoulMachineEntity extends BlockEntity
     public final String NBT_NAME_TAG = "name";
     public final String NBT_SOUL_POWER_TAG = "soul_power";
 
-    public final DefaultedList<ItemStack> items = DefaultedList.ofSize(9, ItemStack.EMPTY);
+    public final DefaultedList<ItemStack> items = DefaultedList.ofSize(2, ItemStack.EMPTY);
 
     public String name;
     public int soulPower;
