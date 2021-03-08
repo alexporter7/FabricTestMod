@@ -7,34 +7,45 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.ArrayPropertyDelegate;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
 public class SoulRechargerScreenHandler extends ScreenHandler {
 
     private final Inventory inventory;
+    PropertyDelegate propertyDelegate;
 
     public SoulRechargerScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(2));
+        this(syncId, playerInventory, new SimpleInventory(2), new ArrayPropertyDelegate(1));
     }
 
-    public SoulRechargerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+    public SoulRechargerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
         super(FabricTestMod.SOUL_RECHARGER_SCREEN_HANDLER, syncId);
+
+        this.propertyDelegate = propertyDelegate;
 
         checkSize(inventory, 2);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
 
         //Add Custom Slots
-        this.addSlot(new SoulSlot(inventory, 0, 25, 30, SoulSlot.SoulSlotType.INPUT));
-        this.addSlot(new SoulSlot(inventory, 1, 133, 30, SoulSlot.SoulSlotType.OUTPUT));
-
-
+        this.addSlot(new SoulSlot(inventory, 0, 26, 60, SoulSlot.SoulSlotType.INPUT));
+        this.addSlot(new SoulSlot(inventory, 1, 134, 60, SoulSlot.SoulSlotType.OUTPUT));
 
         //Add the Player Inventory
         addPlayerInventory(playerInventory);
 
 
+    }
+
+    public int getSoulPower() {
+        return propertyDelegate.get(0);
+    }
+
+    public int getItemSoulPower() {
+        return this.getSlot(1).getStack().isEmpty() ? 0 : 400 - this.getSlot(1).getStack().getDamage();
     }
 
     public void addPlayerInventory(PlayerInventory playerInventory) {

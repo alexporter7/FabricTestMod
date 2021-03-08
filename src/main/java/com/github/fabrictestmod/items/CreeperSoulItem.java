@@ -28,7 +28,7 @@ public class CreeperSoulItem extends Item {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
 
-        if(!context.getWorld().isClient()) {
+        if(!context.getWorld().isClient() && canSpawn(context)) {
             CreeperEntity creeperSpawn = new CreeperEntity(EntityType.CREEPER, context.getWorld());
             //Set Positional Arguments
             creeperSpawn.setPos(
@@ -43,10 +43,15 @@ public class CreeperSoulItem extends Item {
             context.getWorld().spawnEntity(creeperSpawn);
 
             ItemStack creeperSoulItemStack = context.getPlayer().getStackInHand(context.getHand());
-            creeperSoulItemStack.damage(1, context.getPlayer(),
+            creeperSoulItemStack.damage(50, context.getPlayer(),
                     p -> { p.sendToolBreakStatus(context.getHand()); });
         }
 
         return super.useOnBlock(context);
     }
+
+    public boolean canSpawn(ItemUsageContext context) {
+        return context.getPlayer().getStackInHand(context.getHand()).getDamage() < 350;
+    }
+
 }

@@ -26,7 +26,7 @@ public class FabricTestMod implements ModInitializer {
 
 	//Define Mod Items
 	public static final Item CREEPER_SOUL = new CreeperSoulItem(
-			new Item.Settings().group(ItemGroup.MATERIALS).maxCount(1).maxDamage(10));
+			new Item.Settings().group(ItemGroup.MATERIALS).maxCount(1).maxDamage(400));
 	public static final Item CREEPER_SOUL_ESSENCE = new CreeperSoulEssence(
 			new Item.Settings().group(ItemGroup.MATERIALS).maxCount(64));
 
@@ -35,9 +35,13 @@ public class FabricTestMod implements ModInitializer {
 			FabricBlockSettings.of(Material.METAL).strength(4.0f));
 
 	//Define Block Entities
-	public static BlockEntityType<SoulRechargerBlockEntity> SOUL_RECHARGER_BLOCK_ENTITY;
+	public static final BlockEntityType<SoulRechargerBlockEntity> SOUL_RECHARGER_BLOCK_ENTITY;
 
-//	public static ScreenHandlerType<SoulRechargerGuiDescription> SOUL_RECHARGER_SCREEN_TYPE;
+	static {
+		SOUL_RECHARGER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE,
+										String.format("%s:soul_recharger_block_entity", MOD_ID),
+										BlockEntityType.Builder.create(SoulRechargerBlockEntity::new).build(null));
+	}
 
 	//Define Identifiers
 	public static final Identifier SOUL_RECHARGER_ID = new Identifier(MOD_ID, "soul_recharger_block");
@@ -66,9 +70,7 @@ public class FabricTestMod implements ModInitializer {
 				new BlockItem(SOUL_RECHARGER_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
 
 		//Register Block Entities
-		Registry.register(Registry.BLOCK_ENTITY_TYPE,
-				String.format("%s:soul_recharger_block_entity", MOD_ID),
-				BlockEntityType.Builder.create(SoulRechargerBlockEntity::new).build(null));
+
 
 		System.out.println("FTM has been initialized");
 	}

@@ -1,5 +1,6 @@
 package com.github.fabrictestmod.machine;
 
+import com.github.fabrictestmod.FabricTestMod;
 import com.github.fabrictestmod.util.MachineImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -7,10 +8,11 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 
 public abstract class SoulMachineEntity extends BlockEntity
-                                            implements MachineImplementedInventory {
+                                            implements MachineImplementedInventory, Tickable {
 
     public final String NBT_NAME_TAG = "name";
     public final String NBT_SOUL_POWER_TAG = "soul_power";
@@ -26,6 +28,11 @@ public abstract class SoulMachineEntity extends BlockEntity
         this.name = name;
         this.soulPower = 0;
 
+    }
+
+    @Override
+    public BlockEntityType<?> getType() {
+        return FabricTestMod.SOUL_RECHARGER_BLOCK_ENTITY;
     }
 
     public SoulMachineEntity(BlockEntityType<?> type, String name, int soulPower) {
