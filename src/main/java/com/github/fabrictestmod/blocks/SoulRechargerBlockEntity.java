@@ -3,10 +3,12 @@ package com.github.fabrictestmod.blocks;
 import com.github.fabrictestmod.FabricTestMod;
 import com.github.fabrictestmod.client.screen.SoulRechargerScreenHandler;
 import com.github.fabrictestmod.machine.SoulMachineEntity;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -17,7 +19,7 @@ import net.minecraft.util.collection.DefaultedList;
 import org.jetbrains.annotations.Nullable;
 
 public class SoulRechargerBlockEntity extends SoulMachineEntity
-                                        implements NamedScreenHandlerFactory {
+                                        implements NamedScreenHandlerFactory, Tickable {
 
     private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override
@@ -46,7 +48,7 @@ public class SoulRechargerBlockEntity extends SoulMachineEntity
 
     @Override
     public DefaultedList<ItemStack> getItems() {
-        return this.items;
+        return items;
     }
 
     @Override
@@ -66,7 +68,18 @@ public class SoulRechargerBlockEntity extends SoulMachineEntity
     }
 
     @Override
-    public void tick() {
+    public void fromTag(BlockState state, CompoundTag tag) {
+        super.fromTag(state, tag);
+    }
 
+    @Override
+    public CompoundTag toTag(CompoundTag tag) {
+        return super.toTag(tag);
+    }
+
+    @Override
+    public void tick() {
+        if(!world.isClient())
+            System.out.println("tick");
     }
 }

@@ -31,21 +31,26 @@ public class FabricTestMod implements ModInitializer {
 			new Item.Settings().group(ItemGroup.MATERIALS).maxCount(64));
 
 	//Define Mod Blocks
-	public static final Block SOUL_RECHARGER_BLOCK = new SoulRechargerBlock(
-			FabricBlockSettings.of(Material.METAL).strength(4.0f));
+	public static final Block SOUL_RECHARGER_BLOCK;
+	public static final BlockItem SOUL_RECHARGER_BLOCK_ITEM;
 
 	//Define Block Entities
 	public static final BlockEntityType<SoulRechargerBlockEntity> SOUL_RECHARGER_BLOCK_ENTITY;
 
 	static {
+		SOUL_RECHARGER_BLOCK = Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "soul_recharger_block"),
+				new SoulRechargerBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f)));
+		SOUL_RECHARGER_BLOCK_ITEM = Registry.register(Registry.ITEM, new Identifier(MOD_ID, "soul_recharger_block"),
+				new BlockItem(SOUL_RECHARGER_BLOCK, new Item.Settings().group(ItemGroup.MISC)));
 		SOUL_RECHARGER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE,
-										String.format("%s:soul_recharger_block_entity", MOD_ID),
+										String.format("%s:soul_recharger_block", MOD_ID),
 										BlockEntityType.Builder.create(SoulRechargerBlockEntity::new).build(null));
 	}
 
 	//Define Identifiers
 	public static final Identifier SOUL_RECHARGER_ID = new Identifier(MOD_ID, "soul_recharger_block");
 
+	//Define Screen Handler Types
 	public static final ScreenHandlerType<SoulRechargerScreenHandler> SOUL_RECHARGER_SCREEN_HANDLER;
 
 	static {
@@ -56,21 +61,9 @@ public class FabricTestMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
-		//Register Screens
-//		SOUL_RECHARGER_SCREEN_TYPE = ScreenHandlerRegistry.registerSimple(SoulRechargerBlock.ID,
-//				(syncId, inventory) -> new SoulRechargerGuiDescription(syncId, inventory, ScreenHandlerContext.EMPTY));
-
 		//Register Mod Items
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "creeper_soul"), CREEPER_SOUL);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "creeper_soul_essence"), CREEPER_SOUL_ESSENCE);
-
-		//Register Blocks
-		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "soul_recharger_block"), SOUL_RECHARGER_BLOCK);
-		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "soul_recharger_block"),
-				new BlockItem(SOUL_RECHARGER_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
-
-		//Register Block Entities
-
 
 		System.out.println("FTM has been initialized");
 	}

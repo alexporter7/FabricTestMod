@@ -5,6 +5,7 @@ import com.github.fabrictestmod.util.MachineImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -12,7 +13,7 @@ import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 
 public abstract class SoulMachineEntity extends BlockEntity
-                                            implements MachineImplementedInventory, Tickable {
+                                            implements MachineImplementedInventory {
 
     public final String NBT_NAME_TAG = "name";
     public final String NBT_SOUL_POWER_TAG = "soul_power";
@@ -30,17 +31,17 @@ public abstract class SoulMachineEntity extends BlockEntity
 
     }
 
-    @Override
-    public BlockEntityType<?> getType() {
-        return FabricTestMod.SOUL_RECHARGER_BLOCK_ENTITY;
-    }
-
     public SoulMachineEntity(BlockEntityType<?> type, String name, int soulPower) {
 
         super(type);
         this.name = name;
         this.soulPower = soulPower;
 
+    }
+
+    @Override
+    public boolean canPlayerUse(PlayerEntity player) {
+        return pos.isWithinDistance(player.getBlockPos(), 6);
     }
 
     public SoulMachineEntity(BlockEntityType<?> type) {
